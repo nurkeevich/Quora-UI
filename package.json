@@ -1,0 +1,26 @@
+{
+    "name": "quora-ui",
+    "version": "1.0.0",
+    "description": "quora-ui ",
+    "main": "index.js",
+    "scripts": {
+        "start": "parcel index.html --no-hmr -p 3000",
+        "build": "parcel build index.html --no-cache"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-redux": "^7.2.0",
+        "react-router-dom": "^5.1.2"
+    },
+    "devDependencies": {
+        "@types/react": "^16.9.34",
+        "@types/react-dom": "^16.9.6",
+        "@types/react-redux": "^7.1.7",
+        "@types/react-router-dom": "^5.1.4",
+        "parcel-bundler": "^1.12.4",
+        "typescript": "^3.8.3"
+    }
+}

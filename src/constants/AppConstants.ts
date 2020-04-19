@@ -1,4 +1,7 @@
 export enum Routes {
     DASHBOARD = "/",
-    HELP = "/help"
+    HELP = "/help",
+    LOGIN = "/login",
+    SIGNUP = "/signup",
+    PROFILE = "/profile"
 }

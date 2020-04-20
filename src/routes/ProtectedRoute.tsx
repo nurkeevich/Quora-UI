@@ -1,20 +1,15 @@
 import { Route, Redirect } from "react-router-dom";
 import React, { useContext } from "react";
-import userAuth from "../utils/userAuth";
 import { Routes } from "../constants/appConstants";
 import UserContext from "../utils/contexts/UserContext";
 
 const ProtectedRoute = ({ component: Component, ...rest }: any) => {
-
-    const {user} = useContext(UserContext);
-
-    console.log("user inside protected route: ", user);
-    
+    const { user } = useContext(UserContext);
 
     return (
         <Route
             {...rest}
-            render={(props) => {
+            render={props => {
                 if (user) {
                     return <Component {...props} />;
                 } else {

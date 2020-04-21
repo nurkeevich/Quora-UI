@@ -1,25 +1,23 @@
-import { Route, Redirect } from "react-router-dom";
 import React, { useContext } from "react";
+import { AuthContext } from "../utils/Auth";
+import { Route, Redirect } from "react-router-dom";
 import { Routes } from "../constants/appConstants";
-import UserContext from "../utils/contexts/UserContext";
 
-const ProtectedRoute = ({ component: Component, ...rest }: any) => {
-    const { user } = useContext(UserContext);
+const PrivateRoute = ({ component: Component, ...rest }: any) => {
+    const { currentUser, setCurrentUser } = useContext(AuthContext);
 
     return (
         <Route
             {...rest}
             render={props => {
-                if (user) {
+                if (currentUser) {
                     return <Component {...props} />;
                 } else {
                     return (
                         <Redirect
                             to={{
                                 pathname: Routes.LOGIN,
-                                state: {
-                                    from: props.location
-                                }
+                                state: { from: props.location }
                             }}
                         />
                     );
@@ -29,4 +27,4 @@ const ProtectedRoute = ({ component: Component, ...rest }: any) => {
     );
 };
 
-export default ProtectedRoute;
+export default PrivateRoute;

@@ -10,7 +10,7 @@ interface LoginProps extends RouteComponentProps {
 const Login: React.FC<LoginProps> = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { currentUser, setCurrentUser } = useContext(AuthContext);
+    const { setCurrentUser } = useContext(AuthContext);
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const currentEmail = event.currentTarget.value;

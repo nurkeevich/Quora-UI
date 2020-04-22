@@ -15,7 +15,7 @@ interface ICurrentUserProps {
 
 interface IAuthContextProps {
     currentUser: ICurrentUserProps;
-    setCurrentUser: Dispatch<SetStateAction<ICurrentUserProps>>;
+    setCurrentUser: Dispatch<SetStateAction<ICurrentUserProps | undefined>>;
 }
 
 export const AuthContext = createContext({} as IAuthContextProps);

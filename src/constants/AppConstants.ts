@@ -5,3 +5,7 @@ export enum Routes {
     SIGNUP = "/signup",
     PROFILE = "/profile"
 }
+
+export enum URL {
+    GRAPHQL_ENDPOINT = "http://localhost:4000/"
+}

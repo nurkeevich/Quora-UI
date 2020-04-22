@@ -6,6 +6,10 @@ import React, {
     Dispatch,
     SetStateAction
 } from "react";
+import { useQuery } from "@apollo/react-hooks";
+import { meQuery } from "../graphql/query";
+import { Redirect } from "react-router-dom";
+import { Routes } from "../constants/appConstants";
 
 interface ICurrentUserProps {
     id: string;
@@ -26,6 +30,7 @@ export const AuthProvider = ({ children }: any) => {
         currentUser,
         setCurrentUser
     ]);
+    const { loading, error, data } = useQuery(meQuery);
 
     useEffect(() => {
         getUser()

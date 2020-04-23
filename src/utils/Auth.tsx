@@ -8,18 +8,11 @@ import React, {
 } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { meQuery } from "../graphql/query";
-import { Redirect } from "react-router-dom";
-import { Routes } from "../constants/appConstants";
-
-interface ICurrentUserProps {
-    id: string;
-    name: string;
-    email: string;
-}
+import { CurrentUser } from "../constants/types";
 
 interface IAuthContextProps {
-    currentUser: ICurrentUserProps;
-    setCurrentUser: Dispatch<SetStateAction<ICurrentUserProps | undefined>>;
+    currentUser: CurrentUser;
+    setCurrentUser: Dispatch<SetStateAction<CurrentUser | undefined>>;
 }
 
 export const AuthContext = createContext({} as IAuthContextProps);
@@ -32,28 +25,19 @@ export const AuthProvider = ({ children }: any) => {
     ]);
     const { loading, error, data } = useQuery(meQuery);
 
-    useEffect(() => {
-        getUser()
-            .then(user => {
-                setCurrentUser(user);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }, []);
+    if (loading) return <p>Loading ...</p>;
+    if (error) return <p>Error :( {error.message}</p>;
+
+    if (data) console.log(data);
+
+    // if (data) {
+    //     console.log(data);
+    //     setCurrentUser(data.me);
+    // }
 
     return (
         <AuthContext.Provider value={userProvider}>
             {children}
         </AuthContext.Provider>
     );
-};
-
-const getUser = async () => {
-    return undefined;
-    // return {
-    //     id: "123123123",
-    //     name: "Tilek Kadyrov",
-    //     email: "tilek@example.com"
-    // };
 };

@@ -4,8 +4,6 @@ import { AuthContext } from "../utils/Auth";
 const Dashboard = () => {
     const { currentUser, setCurrentUser } = useContext(AuthContext);
 
-    console.log("currentUser", currentUser);
-
     const handleLogout = () => {
         setCurrentUser(undefined);
     };

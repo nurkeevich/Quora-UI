@@ -1,6 +1,5 @@
 import React, {
     useState,
-    useEffect,
     createContext,
     useMemo,
     Dispatch,
@@ -23,17 +22,11 @@ export const AuthProvider = ({ children }: any) => {
         currentUser,
         setCurrentUser
     ]);
-    const { loading, error, data } = useQuery(meQuery);
+    const { data } = useQuery(meQuery);
 
-    if (loading) return <p>Loading ...</p>;
-    if (error) return <p>Error :( {error.message}</p>;
-
-    if (data) console.log(data);
-
-    // if (data) {
-    //     console.log(data);
-    //     setCurrentUser(data.me);
-    // }
+    useMemo(() => {
+        setCurrentUser(data);
+    }, [data]);
 
     return (
         <AuthContext.Provider value={userProvider}>

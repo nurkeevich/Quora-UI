@@ -9,3 +9,13 @@ export const loginMutation = gql`
         }
     }
 `;
+
+export const logoutMutation = gql`
+    mutation logoutMutation {
+        logout {
+            id
+            email
+            name
+        }
+    }
+`;

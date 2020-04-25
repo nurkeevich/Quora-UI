@@ -18,15 +18,10 @@ export const AuthContext = createContext({} as IAuthContextProps);
 
 export const AuthProvider = ({ children }: any) => {
     const [currentUser, setCurrentUser] = useState<any>(null);
-    const userProvider = useMemo(() => ({ currentUser, setCurrentUser }), [
-        currentUser,
-        setCurrentUser
-    ]);
+    const userProvider = useMemo(() => ({ currentUser, setCurrentUser }), [currentUser, setCurrentUser]);
     const { data } = useQuery(meQuery);
 
-    useMemo(() => {
-        setCurrentUser(data);
-    }, [data]);
+    useMemo(() => { setCurrentUser(data) }, [data]);
 
     return (
         <AuthContext.Provider value={userProvider}>

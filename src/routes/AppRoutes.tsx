@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { Routes } from "../constants/appConstants";
 import Header from "../components/shared/Header";
@@ -9,6 +9,7 @@ import Login from "../components/Login";
 import Profile from "../components/Profile";
 import Signup from "../components/Signup";
 import PrivateRoute from "./PrivateRoute";
+import { AuthContext } from "../utils/Auth";
 
 const AppRoutes = () => {
     return (
@@ -16,11 +17,11 @@ const AppRoutes = () => {
             <div>
                 <Header />
                 <Switch>
-                    <Route path={Routes.DASHBOARD} exact={true} component={Dashboard}/>
+                    <Route path={Routes.DASHBOARD} exact component={Dashboard} />
+                    <Route path={Routes.HELP} component={Help} />
                     <PrivateRoute path={Routes.PROFILE} component={Profile} />
                     <Route path={Routes.LOGIN} component={Login} />
                     <Route path={Routes.SIGNUP} component={Signup} />
-                    <Route path={Routes.HELP} component={Help} />
                     <Route component={NotFound} />
                 </Switch>
             </div>

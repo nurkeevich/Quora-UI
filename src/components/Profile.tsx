@@ -6,10 +6,9 @@ import { logoutMutation } from "../graphql/mutation";
 
 const Profile = () => {
     const {currentUser, setCurrentUser} = useContext(AuthContext)
-    const user = useMemo(() => ({currentUser}), [currentUser])
     const [logout, { loading, error, data }] = useMutation<{ logout: CurrentUser }>(logoutMutation);
 
-    console.log(user);
+    console.log(currentUser);
     
 
     const handleLogout = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -32,7 +31,7 @@ const Profile = () => {
     return (
         <div>
             <h1>Profile</h1>
-            {user.currentUser && <button onClick={handleLogout}>logout</button>}
+            {currentUser && <button onClick={handleLogout}>logout</button>}
         </div>
     );
 };

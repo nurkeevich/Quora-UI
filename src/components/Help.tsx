@@ -3,10 +3,9 @@ import { AuthContext } from "../utils/Auth";
 
 const Help = () => {
     const { currentUser } = useContext(AuthContext);
-    const user = useMemo(() => ({ currentUser }), [currentUser]);
 
     const handleGetUser = () => {
-        console.log("CURRENT USER", user.currentUser);
+        console.log("CURRENT USER", currentUser);
     };
 
     return (

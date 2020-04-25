@@ -5,13 +5,14 @@ import { AuthContext } from "../../utils/Auth";
 
 const Header = () => {
     const { currentUser } = useContext(AuthContext);
-    const user = useMemo(() => ({currentUser}), [currentUser])
+    console.log(currentUser);
+    
 
     return (
         <header>
             <NavLink to={Routes.DASHBOARD} exact={true}>Dashboard</NavLink>
             <NavLink to={Routes.HELP}>Help</NavLink>
-            {user.currentUser 
+            {currentUser 
                 ? (<NavLink to={Routes.PROFILE}>Profile</NavLink>) 
                 : (
                     <div>

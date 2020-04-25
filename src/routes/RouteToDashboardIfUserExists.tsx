@@ -1,22 +1,23 @@
-import React, { useContext, useMemo } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../utils/Auth";
 import { Route, Redirect } from "react-router-dom";
 import { Routes } from "../constants/appConstants";
+import React from "react";
 
-const PrivateRoute = ({ component: Component, ...rest }: any) => {
+const RouteToDashboardIfUserExists = ({ component: Component, ...rest }: any) => {
     const { currentUser } = useContext(AuthContext);
 
     return (
         <Route
             {...rest}
             render={props => {
-                if (currentUser) {
+                if (!currentUser) {
                     return <Component {...props} />;
                 } else {
                     return (
                         <Redirect
                             to={{
-                                pathname: Routes.LOGIN,
+                                pathname: Routes.DASHBOARD,
                                 state: { from: props.location }
                             }}
                         />
@@ -27,4 +28,4 @@ const PrivateRoute = ({ component: Component, ...rest }: any) => {
     );
 };
 
-export default PrivateRoute;
+export default RouteToDashboardIfUserExists;

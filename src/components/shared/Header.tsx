@@ -11,7 +11,7 @@ const Header = () => {
         <header>
             <NavLink to={Routes.DASHBOARD} exact={true}>Dashboard</NavLink>
             <NavLink to={Routes.HELP}>Help</NavLink>
-            {user 
+            {user.currentUser 
                 ? (<NavLink to={Routes.PROFILE}>Profile</NavLink>) 
                 : (
                     <div>

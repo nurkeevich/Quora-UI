@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Routes } from "../constants/appConstants";
 import Header from "../components/shared/Header";
 import Dashboard from "../components/Dashboard";
@@ -9,7 +9,6 @@ import Login from "../components/Login";
 import Profile from "../components/Profile";
 import Signup from "../components/Signup";
 import PrivateRoute from "./PrivateRoute";
-import { AuthContext } from "../utils/Auth";
 
 const AppRoutes = () => {
     return (

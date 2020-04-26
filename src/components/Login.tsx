@@ -49,6 +49,11 @@ const Login: React.FC<LoginProps> = props => {
         return <p>Loading...</p>
     }
 
+    if (data) {
+        console.log(data);
+    }
+
+    
     return (
         <div>
             <h1>Login</h1>

@@ -19,3 +19,31 @@ export const logoutMutation = gql`
         }
     }
 `;
+
+export interface ICreatePost {
+    createPost: {
+        id: string;
+        published: boolean;
+        title: string;
+        content: string;
+    };
+}
+
+export const createPostMutation = gql`
+    mutation createPost(
+        $title: String!
+        $content: String!
+        $published: Boolean
+    ) {
+        createPost(title: $title, content: $content, published: $published) {
+            id
+            published
+            title
+            content
+            author {
+                id
+                name
+            }
+        }
+    }
+`;

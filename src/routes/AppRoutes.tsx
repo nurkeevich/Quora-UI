@@ -11,6 +11,7 @@ import Signup from "../components/Signup";
 import PrivateRoute from "./PrivateRoute";
 import RouteToDashboardIfUserExists from "./RouteToDashboardIfUserExists";
 import CreatePost from "../components/posts/CreatePost";
+import MyDrafts from "../components/posts/MyDrafts";
 
 const AppRoutes = () => {
     return (
@@ -22,6 +23,7 @@ const AppRoutes = () => {
                     <Route path={Routes.HELP} component={Help} />
                     <PrivateRoute path={Routes.PROFILE} component={Profile} />
                     <PrivateRoute path={Routes.CREATEPOST} component={CreatePost} />
+                    <PrivateRoute path={Routes.MYDRAFTS} component={MyDrafts} />
                     <RouteToDashboardIfUserExists path={Routes.LOGIN} component={Login} />
                     <RouteToDashboardIfUserExists path={Routes.SIGNUP} component={Signup} />
                     <Route component={NotFound} />

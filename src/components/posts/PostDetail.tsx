@@ -6,7 +6,12 @@ interface PostDetailProps {
 }
 
 const PostDetail = ({ post }: PostDetailProps) => {
-    return <div>{post.title}</div>;
+    return (
+        <div>
+            <p>{post.title}</p>
+            <button>Delete</button>
+        </div>
+    );
 };
 
 export default PostDetail;

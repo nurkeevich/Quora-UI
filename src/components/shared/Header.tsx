@@ -16,6 +16,7 @@ const Header = () => {
                     <div>
                         <NavLink to={Routes.PROFILE}>Profile</NavLink>
                         <NavLink to={Routes.CREATEPOST}>Create Post</NavLink>
+                        <NavLink to={Routes.MYDRAFTS}>My Drafts</NavLink>
                     </div>
                 ) 
                 : (

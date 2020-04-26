@@ -14,7 +14,6 @@ const Profile = () => {
         logout()
             .then(response => {
                 if (response.data) {
-                    console.log(response.data.logout.name);
                     alert("Successfully logout!");
                 } else {
                     console.log(response);

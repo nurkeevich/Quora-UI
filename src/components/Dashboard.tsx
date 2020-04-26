@@ -7,8 +7,6 @@ interface DashboardProps extends RouteComponentProps {
 }
 
 const Dashboard: React.FC<DashboardProps> = props => {
-    console.log(props);
-    
     return (
         <div>
             <h1>Dashboard</h1>

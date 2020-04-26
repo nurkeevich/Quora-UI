@@ -5,15 +5,24 @@ import { postsQuery, IPostQuery } from "../../graphql/query";
 
 export const Posts = () => {
     let posts = undefined;
-    const { loading, error, data } = useQuery<IPostQuery>(postsQuery);
-    
-    if (loading) {
-        return <p>Loading...</p>
-    }
+    const { loading, error, data, refetch, networkStatus } = useQuery<IPostQuery>(postsQuery, { notifyOnNetworkStatusChange: true });
 
+    if (loading) <p>Loading...</p>
     if (data) {
-        posts = data.posts.map(post => <PostDetail post={post} key={post.id} />);
+        posts = data.posts.map(post => <PostDetail post={post} key={post.id}/>);
     }
 
-    return <ul>{posts}</ul>;
+    if (networkStatus === 4) <p>Refetching...</p>
+
+    const handleRefetch = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        event.preventDefault();
+        refetch();
+    };
+
+    return (
+        <div>
+            <ul>{posts}</ul>
+            <button onClick={handleRefetch}>Refetch</button>
+        </div>
+    );
 };

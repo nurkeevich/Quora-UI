@@ -3,7 +3,8 @@ export enum Routes {
     HELP = "/help",
     LOGIN = "/login",
     SIGNUP = "/signup",
-    PROFILE = "/profile"
+    PROFILE = "/profile",
+    CREATEPOST="/createpost"
 }
 
 export enum URL {

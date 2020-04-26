@@ -8,9 +8,6 @@ const Profile = () => {
     const {currentUser, setCurrentUser} = useContext(AuthContext)
     const [logout, { loading, error, data }] = useMutation<{ logout: CurrentUser }>(logoutMutation);
 
-    console.log(currentUser);
-    
-
     const handleLogout = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         setCurrentUser(undefined);
@@ -27,6 +24,10 @@ const Profile = () => {
                 console.log("error", error);
             });
     };
+
+    if (loading) {
+        return <p>Loading...</p>
+    }
 
     return (
         <div>

@@ -13,7 +13,7 @@ interface LoginProps extends RouteComponentProps {
 const Login: React.FC<LoginProps> = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const {currentUser, setCurrentUser } = useContext(AuthContext);
+    const { setCurrentUser } = useContext(AuthContext);
     const [login, { loading, error, data }] = useMutation<{ login: CurrentUser }>(loginMutation);
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,6 +29,7 @@ const Login: React.FC<LoginProps> = props => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const result = login({ variables: { email, password } });
+        setPassword("");
         result
             .then(response => {
                 if (response.data) {
@@ -41,7 +42,12 @@ const Login: React.FC<LoginProps> = props => {
             .catch(error => {
                 setCurrentUser(undefined);
             });
+        
     };
+
+    if (loading) {
+        return <p>Loading...</p>
+    }
 
     return (
         <div>

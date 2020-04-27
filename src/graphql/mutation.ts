@@ -20,15 +20,6 @@ export const logoutMutation = gql`
     }
 `;
 
-export interface ICreatePost {
-    createPost: {
-        id: string;
-        published: boolean;
-        title: string;
-        content: string;
-    };
-}
-
 export const createPostMutation = gql`
     mutation createPost(
         $title: String!

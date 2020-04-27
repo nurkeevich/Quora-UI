@@ -5,8 +5,6 @@ import React, {
     Dispatch,
     SetStateAction
 } from "react";
-import { useQuery } from "@apollo/react-hooks";
-import { meQuery } from "../graphql/query";
 import { CurrentUser } from "../constants/types";
 
 interface IAuthContextProps {
@@ -16,20 +14,22 @@ interface IAuthContextProps {
 
 export const AuthContext = createContext({} as IAuthContextProps);
 
-export const AuthProvider = ({ children }: any) => {
-    const [currentUser, setCurrentUser] = useState<any>(null);
-    const userProvider = useMemo(() => ({ currentUser, setCurrentUser }), [currentUser, setCurrentUser]);
-    const { data, loading, error} = useQuery(meQuery);
+interface AuthProviderProps {
+    children: any,
+    user: any
+}
 
-    useMemo(() => { setCurrentUser(data) }, [data]);
-
-    if (loading) {
-        return <p>Loading...</p>
-    }
+export const AuthProvider = (props: AuthProviderProps) => {
+    const [currentUser, setCurrentUser] = useState(props.user);
+    const userProvider = useMemo(() => ({ currentUser, setCurrentUser }), [
+        currentUser,
+        setCurrentUser
+    ]);
 
     return (
         <AuthContext.Provider value={userProvider}>
-            {children}
+            {props.children}
         </AuthContext.Provider>
     );
 };
+

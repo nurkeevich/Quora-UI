@@ -14,7 +14,7 @@ const Login: React.FC<LoginProps> = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { setCurrentUser } = useContext(AuthContext);
-    const [login, { loading, error, data }] = useMutation<{ login: CurrentUser }>(loginMutation);
+    const [login, {client, loading, error, data }] = useMutation<{ login: CurrentUser }>(loginMutation);
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const currentEmail = event.currentTarget.value;
@@ -33,8 +33,9 @@ const Login: React.FC<LoginProps> = props => {
         result
             .then(response => {
                 if (response.data) {
+                    client?.resetStore();
                     setCurrentUser(response.data.login);
-                    props.history.push(Routes.PROFILE);
+                    props.history.push(Routes.DASHBOARD);
                 } else {
                     setCurrentUser(undefined);
                 }
@@ -47,6 +48,10 @@ const Login: React.FC<LoginProps> = props => {
 
     if (loading) {
         return <p>Loading...</p>
+    }
+
+    if (error) {
+        return <p>Error in Login {error.message}</p>
     }
 
     if (data) {

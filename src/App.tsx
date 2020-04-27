@@ -3,13 +3,14 @@ import AppRoutes from "./routes/AppRoutes";
 import { AuthProvider } from "./utils/Auth";
 import { ApolloProvider } from "@apollo/react-hooks";
 import apolloClient from "./utils/apolloClient";
+import { UserProvider } from "./utils/UserProvider";
 
 const App = () => {
     return (
         <ApolloProvider client={apolloClient}>
-            <AuthProvider>
+            <UserProvider>
                 <AppRoutes />
-            </AuthProvider>
+            </UserProvider>
         </ApolloProvider>
     );
 };

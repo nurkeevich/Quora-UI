@@ -5,8 +5,8 @@ import { CurrentUser } from "../constants/types";
 import { logoutMutation } from "../graphql/mutation";
 
 const Profile = () => {
-    const {currentUser, setCurrentUser} = useContext(AuthContext)
-    const [logout, { loading, error, data }] = useMutation<{ logout: CurrentUser }>(logoutMutation);
+    const { currentUser, setCurrentUser } = useContext(AuthContext);
+    const [logout, { client, loading, error, data }] = useMutation<{ logout: CurrentUser }>(logoutMutation);
 
     const handleLogout = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
@@ -14,18 +14,23 @@ const Profile = () => {
         logout()
             .then(response => {
                 if (response.data) {
+                    client?.clearStore();
                     alert("Successfully logout!");
                 } else {
                     console.log(response);
                 }
             })
-            .then(error => {
+            .catch(error => {
                 console.log("error", error);
             });
     };
 
     if (loading) {
-        return <p>Loading...</p>
+        return <p>Loading...</p>;
+    }
+    
+    if (error) {
+        return <p>Error in profile {error.message}</p>
     }
 
     return (

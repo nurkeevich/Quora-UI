@@ -1,31 +1,26 @@
 import React, { useState, FC } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { ICreatePost, createPostMutation } from "../../graphql/mutation";
+import { createPostMutation } from "../../graphql/mutation";
 import { RouteComponentProps } from "react-router-dom";
 import { Routes } from "../../constants/appConstants";
 import { PostForm } from "./PostForm";
-import { Post } from "../../graphql/query";
+import { Post } from "../../constants/types";
 
 interface CreatePostProps extends RouteComponentProps {
     // enter own props here
 }
 
 const CreatePost: FC<CreatePostProps> = props => {
-    const [createPost, { loading, error, data }] = useMutation<{ createPost: ICreatePost }>(createPostMutation);
+    const [createPost, { loading, error, data }] = useMutation<{createPost: Post}>(createPostMutation);
 
     if (loading) <p>Loading...</p>;
-    if (error) <p>{error.message}</p>;
+    if (error) <p>Error in CreatePost {error.message}</p>;
 
     const handleSubmit = (post: Post) => {
         const result = createPost({ variables: { ...post } });
         result
-            .then(res => {
-                console.log(res);
-                props.history.push(post.published ? Routes.DASHBOARD : Routes.MYDRAFTS)
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            .then(res => props.history.push(post.published ? Routes.DASHBOARD : Routes.MYDRAFTS))
+            .catch(err => console.log(err));
     };
 
     return (

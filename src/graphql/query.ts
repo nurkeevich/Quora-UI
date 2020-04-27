@@ -10,25 +10,6 @@ export const meQuery = gql`
     }
 `;
 
-export interface Author {
-    id: string;
-    name: string;
-    email: string;
-}
-
-export interface Post {
-    id?: string;
-    published: boolean;
-    title: string;
-    content: string;
-    author?: Author
-    voters?: Author[];
-}
-
-export interface IPostQuery {
-    posts: Post[];
-}
-
 export const postsQuery = gql`
     query posts {
         posts {
@@ -49,10 +30,6 @@ export const postsQuery = gql`
         }
     }
 `;
-
-export interface IMyUnpublishedPosts {
-    myUnpublishedPosts: Post[];
-}
 
 export const myUnpublishedPosts = gql`
     query myUnpublishedPosts {

@@ -42,6 +42,11 @@ export const myUnpublishedPosts = gql`
                 id
                 name
             }
+            author {
+                id
+                email
+                name
+            }
         }
     }
 `;

@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Post } from "../../constants/types";
 import { AuthContext } from "../../utils/Auth";
+import { useMutation } from "@apollo/react-hooks";
+import { deletePostMutation, DeletePostMutationResponse } from "../../graphql/mutation";
 
 interface PostDetailProps {
     post: Post;
@@ -8,13 +10,17 @@ interface PostDetailProps {
 
 const PostDetail = ({ post }: PostDetailProps) => {
     const { currentUser } = useContext(AuthContext);
+    const [deletePost, { loading, error }] = useMutation<{ deletePost: DeletePostMutationResponse }>(deletePostMutation);
 
     const handlePostDelete = () => {
-        console.log("title", post.title);
-        console.log("id", post.id);
-
-        console.log("Current user ID", currentUser.id);
-        console.log("Post author ID", post.author?.id);
+        const result = deletePost({ variables: { id: post.id } });
+        result
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log("Error in PostDetail", err);
+            });
     };
 
     const isAuthor = () => {
@@ -24,6 +30,9 @@ const PostDetail = ({ post }: PostDetailProps) => {
             return false;
         }
     };
+
+    if (loading) <p>Loading...</p>;
+    if (error) <p>Error on PostDetail {error.message}</p>;
 
     return (
         <div>

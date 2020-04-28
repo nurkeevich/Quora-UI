@@ -1,5 +1,11 @@
 import { gql } from "apollo-boost";
 
+export interface LoginMutationResponse {
+    id: string;
+    email: string;
+    name: string; 
+}
+
 export const loginMutation = gql`
     mutation login($email: String!, $password: String!) {
         login(email: $email, password: $password) {
@@ -10,6 +16,12 @@ export const loginMutation = gql`
     }
 `;
 
+export interface LogoutMutationResponse {
+    id: string;
+    email: string;
+    name: string;
+}
+
 export const logoutMutation = gql`
     mutation logoutMutation {
         logout {
@@ -19,6 +31,17 @@ export const logoutMutation = gql`
         }
     }
 `;
+
+export interface CreatePostMutationResponse {
+    id: string;
+    published: boolean;
+    title: string;
+    content: string;
+    author: {
+        id: string;
+        name: string;
+    };
+}
 
 export const createPostMutation = gql`
     mutation createPost(
@@ -35,6 +58,24 @@ export const createPostMutation = gql`
                 id
                 name
             }
+        }
+    }
+`;
+
+export interface DeletePostMutationResponse {
+    id: string;
+    published: boolean;
+    title: string;
+    content: string;
+}
+
+export const deletePostMutation = gql`
+    mutation deletePostMutation($id: ID!) {
+        deletePost(id: $id) {
+            id
+            published
+            title
+            content
         }
     }
 `;

@@ -3,7 +3,7 @@ import { AuthContext } from "../utils/Auth";
 import { RouteComponentProps } from "react-router-dom";
 import { Routes } from "../constants/appConstants";
 import { useMutation } from "@apollo/react-hooks";
-import { loginMutation } from "../graphql/mutation";
+import { loginMutation, LoginMutationResponse } from "../graphql/mutation";
 import { CurrentUser } from "../constants/types";
 
 interface LoginProps extends RouteComponentProps {
@@ -14,7 +14,7 @@ const Login: React.FC<LoginProps> = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { setCurrentUser } = useContext(AuthContext);
-    const [login, {client, loading, error, data }] = useMutation<{ login: CurrentUser }>(loginMutation);
+    const [login, {client, loading, error, data }] = useMutation<{ login: LoginMutationResponse }>(loginMutation);
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const currentEmail = event.currentTarget.value;

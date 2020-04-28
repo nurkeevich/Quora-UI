@@ -2,11 +2,11 @@ import React, { useContext, useMemo } from "react";
 import { AuthContext } from "../utils/Auth";
 import { useMutation } from "@apollo/react-hooks";
 import { CurrentUser } from "../constants/types";
-import { logoutMutation } from "../graphql/mutation";
+import { logoutMutation, LogoutMutationResponse } from "../graphql/mutation";
 
 const Profile = () => {
     const { currentUser, setCurrentUser } = useContext(AuthContext);
-    const [logout, { client, loading, error, data }] = useMutation<{ logout: CurrentUser }>(logoutMutation);
+    const [logout, { client, loading, error, data }] = useMutation<{ logout: LogoutMutationResponse }>(logoutMutation);
 
     const handleLogout = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();

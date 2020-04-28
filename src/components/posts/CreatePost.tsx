@@ -1,6 +1,6 @@
-import React, { useState, FC } from "react";
+import React, { FC } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { createPostMutation } from "../../graphql/mutation";
+import { createPostMutation, CreatePostMutationResponse } from "../../graphql/mutation";
 import { RouteComponentProps } from "react-router-dom";
 import { Routes } from "../../constants/appConstants";
 import { PostForm } from "./PostForm";
@@ -11,7 +11,7 @@ interface CreatePostProps extends RouteComponentProps {
 }
 
 const CreatePost: FC<CreatePostProps> = props => {
-    const [createPost, { loading, error, data }] = useMutation<{createPost: Post}>(createPostMutation);
+    const [createPost, { loading, error }] = useMutation<{createPost: CreatePostMutationResponse}>(createPostMutation);
 
     if (loading) <p>Loading...</p>;
     if (error) <p>Error in CreatePost {error.message}</p>;

@@ -3,7 +3,7 @@ import { gql } from "apollo-boost";
 export interface LoginMutationResponse {
     id: string;
     email: string;
-    name: string; 
+    name: string;
 }
 
 export const loginMutation = gql`
@@ -72,6 +72,24 @@ export interface DeletePostMutationResponse {
 export const deletePostMutation = gql`
     mutation deletePostMutation($id: ID!) {
         deletePost(id: $id) {
+            id
+            published
+            title
+            content
+        }
+    }
+`;
+
+export interface UpdatePostMutationResponse {
+    id: string;
+    published: boolean;
+    title: string;
+    content: string;
+}
+
+export const updatePostMutation = gql`
+    mutation updatePost($id: ID!, $title: String, $content: String) {
+        updatePost(id: $id, data: { title: $title, content: $content }) {
             id
             published
             title

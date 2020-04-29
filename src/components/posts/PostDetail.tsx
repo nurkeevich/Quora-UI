@@ -1,27 +1,14 @@
 import React, { useContext } from "react";
 import { Post } from "../../constants/types";
 import { AuthContext } from "../../utils/Auth";
-import { useMutation } from "@apollo/react-hooks";
-import { deletePostMutation, DeletePostMutationResponse } from "../../graphql/mutation";
 
 interface PostDetailProps {
     post: Post;
+    handlePostDelete: (id: string) => void;
 }
 
-const PostDetail = ({ post }: PostDetailProps) => {
+const PostDetail = ({ post, handlePostDelete }: PostDetailProps) => {
     const { currentUser } = useContext(AuthContext);
-    const [deletePost, { loading, error }] = useMutation<{ deletePost: DeletePostMutationResponse }>(deletePostMutation);
-
-    const handlePostDelete = () => {
-        const result = deletePost({ variables: { id: post.id } });
-        result
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.log("Error in PostDetail", err);
-            });
-    };
 
     const isAuthor = () => {
         if (post.author && currentUser) {
@@ -31,13 +18,12 @@ const PostDetail = ({ post }: PostDetailProps) => {
         }
     };
 
-    if (loading) <p>Loading...</p>;
-    if (error) <p>Error on PostDetail {error.message}</p>;
+    const handleDelete = () => handlePostDelete(post.id!);
 
     return (
         <div>
             <p>{post.title}</p>
-            {isAuthor() && <button onClick={handlePostDelete}>Delete</button>}
+            {isAuthor() && <button onClick={handleDelete}>Delete</button>}
         </div>
     );
 };

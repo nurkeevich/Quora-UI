@@ -5,13 +5,16 @@
     "main": "index.js",
     "scripts": {
         "start": "parcel index.html --no-hmr -p 3000",
-        "build": "parcel build index.html --no-cache"
+        "build": "parcel build index.html --no-cache",
+        "test": "npx cypress open"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "@apollo/react-hooks": "^3.1.5",
         "apollo-boost": "^0.4.7",
+        "cypress": "^4.5.0",
+        "cypress-cucumber-preprocessor": "^2.3.1",
         "graphql": "^15.0.0",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
@@ -19,6 +22,7 @@
         "react-router-dom": "^5.1.2"
     },
     "devDependencies": {
+        "@types/cypress-cucumber-preprocessor": "^1.14.1",
         "@types/react": "^16.9.34",
         "@types/react-dom": "^16.9.6",
         "@types/react-redux": "^7.1.7",

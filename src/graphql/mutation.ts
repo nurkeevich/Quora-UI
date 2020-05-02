@@ -88,8 +88,13 @@ export interface UpdatePostMutationResponse {
 }
 
 export const updatePostMutation = gql`
-    mutation updatePost($id: ID!, $title: String, $content: String) {
-        updatePost(id: $id, data: { title: $title, content: $content }) {
+    mutation updatePost(
+        $id: ID!
+        $title: String
+        $content: String
+        $published: Boolean
+    ) {
+        updatePost(id: $id, data: { title: $title, content: $content, published: $published }) {
             id
             published
             title

@@ -16,35 +16,23 @@ export const Posts = () => {
         { refetchQueries: [{ query: postsQuery }] }
     );
 
-    if (loading || loadingDeletePost) <p>Loading...</p>;
-    if (error || errorDeletePost) <p>Error in posts</p>;
+    if (loading || loadingDeletePost) return <p>Loading...</p>;
+    if (error || errorDeletePost) return <p>Error in posts</p>;
 
     const handlePostDelete = (id: string) => {
         const result = deletePost({ variables: { id } });
         result
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
     };
 
     if (data) {
-        posts = data.posts.map(post => (
-            <PostDetail
-                handlePostDelete={handlePostDelete}
-                post={post}
-                key={post.id}
-            />
-        ));
+        posts = data.posts.map(post => <PostDetail handlePostDelete={handlePostDelete} post={post} key={post.id} />);
     }
 
     if (networkStatus === 4) <p>Refetching...</p>;
 
-    const handleRefetch = (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
+    const handleRefetch = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         refetch();
     };

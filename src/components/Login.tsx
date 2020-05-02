@@ -4,7 +4,6 @@ import { RouteComponentProps } from "react-router-dom";
 import { Routes } from "../constants/appConstants";
 import { useMutation } from "@apollo/react-hooks";
 import { loginMutation, LoginMutationResponse } from "../graphql/mutation";
-import { CurrentUser } from "../constants/types";
 
 interface LoginProps extends RouteComponentProps {
     // add own custom props
@@ -14,8 +13,19 @@ const Login: React.FC<LoginProps> = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { setCurrentUser } = useContext(AuthContext);
-    const [login, {client, loading, error, data }] = useMutation<{ login: LoginMutationResponse }>(loginMutation);
+    const [login, { client, loading, error, data }] = useMutation<{ login: LoginMutationResponse }>(loginMutation);
 
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (error) {
+        return <p>Error in Login {error.message}</p>;
+    }
+
+    if (data) {
+        console.log(data);
+    }
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const currentEmail = event.currentTarget.value;
         setEmail(currentEmail);
@@ -43,28 +53,14 @@ const Login: React.FC<LoginProps> = props => {
             .catch(error => {
                 setCurrentUser(undefined);
             });
-        
     };
 
-    if (loading) {
-        return <p>Loading...</p>
-    }
-
-    if (error) {
-        return <p>Error in Login {error.message}</p>
-    }
-
-    if (data) {
-        console.log(data);
-    }
-
-    
     return (
         <div>
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Enter email" value={email} onChange={handleEmailChange}/>
-                <input type="password" placeholder="Enter password" value={password} onChange={handlePasswordChange}/>
+                <input type="password" placeholder="Enter password" value={password} onChange={handlePasswordChange} />
                 <button type="submit">Login</button>
             </form>
         </div>

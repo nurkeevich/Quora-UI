@@ -12,6 +12,7 @@ import PrivateRoute from "./PrivateRoute";
 import RouteToDashboardIfUserExists from "./RouteToDashboardIfUserExists";
 import CreatePost from "../components/posts/CreatePost";
 import MyDrafts from "../components/posts/MyDrafts";
+import EditPost from "../components/posts/EditPost";
 
 const AppRoutes = () => {
     return (
@@ -24,6 +25,7 @@ const AppRoutes = () => {
                     <PrivateRoute path={Routes.PROFILE} component={Profile} />
                     <PrivateRoute path={Routes.CREATEPOST} component={CreatePost} />
                     <PrivateRoute path={Routes.MYDRAFTS} component={MyDrafts} />
+                    <PrivateRoute path={Routes.EDIT_POST + "/:id"} component={EditPost} />
                     <RouteToDashboardIfUserExists path={Routes.LOGIN} component={Login} />
                     <RouteToDashboardIfUserExists path={Routes.SIGNUP} component={Signup} />
                     <Route component={NotFound} />

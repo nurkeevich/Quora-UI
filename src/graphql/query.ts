@@ -50,3 +50,21 @@ export const myUnpublishedPosts = gql`
         }
     }
 `;
+
+export interface GetPostResponse {
+    id: string;
+    published: boolean;
+    title: string;
+    content: string;
+}
+
+export const getPost = gql`
+    query getPost($id: ID!) {
+        post(id: $id) {
+            id
+            published
+            title
+            content
+        }
+    }
+`;

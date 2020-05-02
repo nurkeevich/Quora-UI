@@ -22,8 +22,8 @@ const MyDrafts = () => {
         { refetchQueries: [{ query: myUnpublishedPosts }] }
     );
 
-    if (loading || loadingDeletePost) <p>Loading...</p>;
-    if (error || errorDeletePost) <p>Error in MyDrafts</p>;
+    if (loading || loadingDeletePost) return <p>Loading...</p>;
+    if (error || errorDeletePost) return <p>Error in MyDrafts</p>;
 
     const handlePostDelete = (id: string) => {
         const result = deletePost({ variables: { id } });

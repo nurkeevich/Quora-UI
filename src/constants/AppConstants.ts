@@ -5,7 +5,8 @@ export enum Routes {
     SIGNUP = "/signup",
     PROFILE = "/profile",
     CREATEPOST = "/createpost",
-    MYDRAFTS = "/drafts"
+    MYDRAFTS = "/drafts",
+    EDIT_POST = "/edit"
 }
 
 export enum URL {

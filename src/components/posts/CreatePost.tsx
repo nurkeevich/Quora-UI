@@ -5,16 +5,21 @@ import { RouteComponentProps } from "react-router-dom";
 import { Routes } from "../../constants/appConstants";
 import { PostForm } from "./PostForm";
 import { Post } from "../../constants/types";
+import { postsQuery, myUnpublishedPosts } from "../../graphql/query";
 
 interface CreatePostProps extends RouteComponentProps {
     // enter own props here
 }
 
 const CreatePost: FC<CreatePostProps> = props => {
-    const [createPost, { loading, error }] = useMutation<{createPost: CreatePostMutationResponse}>(createPostMutation);
+    const [createPost, { loading, error }] = useMutation<{
+        createPost: CreatePostMutationResponse;
+    }>(createPostMutation, {
+        refetchQueries: [{ query: postsQuery }, { query: myUnpublishedPosts }]
+    });
 
-    if (loading) <p>Loading...</p>;
-    if (error) <p>Error in CreatePost {error.message}</p>;
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error in CreatePost {error.message}</p>;
 
     const handleSubmit = (post: Post) => {
         const result = createPost({ variables: { ...post } });

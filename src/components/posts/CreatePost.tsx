@@ -28,10 +28,15 @@ const CreatePost: FC<CreatePostProps> = props => {
             .catch(err => console.log(err));
     };
 
+    const handleFormCancel = () => {
+        props.history.push(Routes.DASHBOARD);
+    }
+    
+
     return (
         <div>
             <h1>Create Post</h1>
-            <PostForm handleSubmit={handleSubmit} />
+            <PostForm handleSubmit={handleSubmit} handleFormCancel={handleFormCancel}/>
         </div>
     );
 };

@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import { Post } from "../../constants/types";
+import { RouteComponentProps } from "react-router-dom";
+import { Routes } from "../../constants/appConstants";
 
 interface PostFormProps {
     handleSubmit: (post: Post) => void;
+    handleFormCancel: () => void;
     post?: Post;
 }
 
@@ -13,7 +16,7 @@ export const PostForm = (props: PostFormProps) => {
     const [error, setError] = useState("");
     const buttonText = props.post ? "Save Post" : "Add Post";
 
-    const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleFormSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         if (!title || !content) {
             setError("Title and/or content has to be filled");
@@ -21,6 +24,11 @@ export const PostForm = (props: PostFormProps) => {
             setError("");
             props.handleSubmit({ content, published, title });
         }
+    };
+    
+    const handleCancel = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        event.preventDefault();
+        props.handleFormCancel();
     };
 
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +49,7 @@ export const PostForm = (props: PostFormProps) => {
     return (
         <div>
             {error && <p>{error}</p>}
-            <form onSubmit={handleFormSubmit}>
+            <div>
                 <input
                     autoFocus
                     type="text"
@@ -59,8 +67,11 @@ export const PostForm = (props: PostFormProps) => {
                     checked={published}
                     onChange={handleCheckboxChange}
                 />
-                <button>{buttonText}</button>
-            </form>
+            </div>
+            <div>
+                <button onClick={handleFormSubmit}>{buttonText}</button>
+                <button onClick={handleCancel}>Cancel</button>
+            </div>
         </div>
     );
 };
